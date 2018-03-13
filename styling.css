@@ -1,0 +1,393 @@
+body {
+    background: url('images/vintagesnookerbackground.jpg') center center fixed;
+    background-size: cover;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+h1 {
+    font-size: 5em;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2.5em;
+}
+
+h2 a,
+.searchResultsItem a {
+    color: white;
+}
+
+h2 a:hover,
+.searchResultsItem a:hover {
+    color: lightgreen;
+    cursor: pointer;
+}
+
+
+/* HEADING */
+
+#mainHeading {
+    margin: 50px 0 auto;
+    padding-top: 50px;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px black;
+}
+
+
+/* SEARCH FORM */
+
+#searchformdiv {
+    text-align: center;
+    margin: 0 auto;
+}
+
+#search {
+    min-width: 300px;
+    font-weight: 600;
+}
+
+ul.ui-autocomplete {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+
+/* SEARCH RESULTS */
+
+#searchResultsBox {
+    font-size: 2em;
+    text-align: center;
+    color: white;
+    margin-top: 50px;
+    background-color: rgba(0, 0, 0, 0.25);
+    /* display: none; */
+}
+
+.searchResultsItem {
+    background-color: rgba(255, 255, 255, 0.25);
+    color: black;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    text-align: left;
+    padding: 1px 0 1px 10px;
+    margin: 5px auto;
+}
+
+
+/* STARS AND TOURNAMENTS BROWSERS */
+
+#starsBrowserContainer,
+#tournamentsBrowserContainer,
+#articlesBrowserContainer {
+    text-align: center;
+    color: white;
+    margin: 50px auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 90%;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.starsBrowserRadioButtons {
+    width: 33.33%;
+    float: left;
+    font-size: 2.25vw;
+    cursor: pointer;
+}
+
+
+/* Star Browser Accordions */
+
+#starsBySurnameAccordion,
+#starsByCountryAccordion,
+#starsByEraAccordion {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    margin: 10px auto;
+    text-align: left;
+    width: 75%;
+}
+
+#tournamentsAccordion {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    margin: 0 auto;
+    text-align: left;
+    width: 75%;
+}
+
+#starsBySurnameAccordionSections h3,
+#starsByCountryAccordionSections h3,
+#starsByEraAccordionSections h3,
+#tournamentsAccordionSections h3 {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: 1.75em;
+}
+
+#starsBySurnameAccordionSections p,
+#starsByCountryAccordionSections p,
+#starsByEraAccordionSections p,
+#tournamentsAccordionSections p {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: 1.5em;
+}
+
+
+/* INFO DISPLAY MODALS */
+
+body .modal-lg {
+    width: 95%;
+    max-height: calc(100vh - 50px);
+}
+
+.modal-header {
+    height: 40px;
+}
+
+body #modalTitle {
+    float: left;
+}
+
+.modal-body {
+    height: 525px;
+}
+
+#personHeader {
+    margin-bottom: 10px;
+}
+
+#personBiog {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: calc(14px + .5vw);
+}
+
+#personName {
+    display: table;
+}
+
+#personFlag {
+    display: table-cell;
+    vertical-align: middle;
+    width: 70px;
+}
+
+#personFlag img {
+    -webkit-filter: drop-shadow(1px 1px 1px #333333);
+    filter: drop-shadow(1px 1px 1px #333333);
+}
+
+#displayName {
+    font-size: calc(14px + 1.75vw);
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding-right: 5px;
+}
+
+#honours {
+    font-size: calc(16px + 1vw);
+}
+
+#nickname {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: calc(14px + 0.75vw);
+}
+
+.birthDeath {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: calc(10px + 0.5vw);
+}
+
+#birthDeathBrackets {
+    font-size: calc(10px + 0.666vw);
+    color: #333333;
+}
+
+#personMainPhoto,
+#personStillsGallery,
+#videoVault {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: calc(10px + .2vw);
+    font-style: italic;
+    text-align: center;
+    line-height: calc(14px + .25vw);
+}
+
+#personSymbols {
+    padding: 5px;
+    text-align: center;
+}
+
+.booleanIcon {
+    height: 50%;
+    width: 10%;
+    max-height: 150px;
+}
+
+#personStillsGallery img {
+    width: 100%;
+    max-height: 200px;
+}
+
+#personBiog h5 {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: calc(12px + 0.5vw);
+    text-align: justify;
+}
+
+#personBiog p {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: calc(12px + .25vw);
+    text-align: justify;
+}
+
+.additionalReading {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* FOOTER */
+
+.footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    padding-top: 5px;
+    color: white;
+}
+
+
+/* NAVBAR */
+
+.navbar-custom {
+    background-color: #000000;
+    border-color: #000000;
+    background-image: -webkit-gradient(linear, left 0%, left 100%, from(#1a1a1a), to(#000000));
+    background-image: -webkit-linear-gradient(top, #1a1a1a, 0%, #000000, 100%);
+    background-image: -moz-linear-gradient(top, #1a1a1a 0%, #000000 100%);
+    background-image: linear-gradient(to bottom, #1a1a1a 0%, #000000 100%);
+    background-repeat: repeat-x;
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ff1a1a1a', endColorstr='#ff000000', GradientType=0);
+}
+
+.navbar-custom .navbar-brand {
+    color: #ffffff;
+}
+
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus {
+    color: #e6e6e6;
+    background-color: transparent;
+}
+
+.navbar-custom .navbar-text {
+    color: #ffffff;
+}
+
+.navbar-custom .navbar-nav>li>a {
+    color: #ffffff;
+}
+
+.navbar-custom .navbar-nav>li>a:hover,
+.navbar-custom .navbar-nav>li>a:focus {
+    color: #c0c0c0;
+    background-color: transparent;
+}
+
+.navbar-custom .navbar-nav>.active>a,
+.navbar-custom .navbar-nav>.active>a:hover,
+.navbar-custom .navbar-nav>.active>a:focus {
+    color: #c0c0c0;
+    background-color: #000000;
+    background-image: -webkit-gradient(linear, left 0%, left 100%, from(#000000), to(#1a1a1a));
+    background-image: -webkit-linear-gradient(top, #000000, 0%, #1a1a1a, 100%);
+    background-image: -moz-linear-gradient(top, #000000 0%, #1a1a1a 100%);
+    background-image: linear-gradient(to bottom, #000000 0%, #1a1a1a 100%);
+    background-repeat: repeat-x;
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ff000000', endColorstr='#ff1a1a1a', GradientType=0);
+}
+
+.navbar-custom .navbar-nav>.disabled>a,
+.navbar-custom .navbar-nav>.disabled>a:hover,
+.navbar-custom .navbar-nav>.disabled>a:focus {
+    color: #cccccc;
+    background-color: transparent;
+}
+
+.navbar-custom .navbar-toggle {
+    border-color: #dddddd;
+}
+
+.navbar-custom .navbar-toggle:hover,
+.navbar-custom .navbar-toggle:focus {
+    background-color: #dddddd;
+}
+
+.navbar-custom .navbar-toggle .icon-bar {
+    background-color: #cccccc;
+}
+
+.navbar-custom .navbar-collapse,
+.navbar-custom .navbar-form {
+    border-color: #000000;
+}
+
+.navbar-custom .navbar-nav>.dropdown>a:hover .caret,
+.navbar-custom .navbar-nav>.dropdown>a:focus .caret {
+    border-top-color: #c0c0c0;
+    border-bottom-color: #c0c0c0;
+}
+
+.navbar-custom .navbar-nav>.open>a,
+.navbar-custom .navbar-nav>.open>a:hover,
+.navbar-custom .navbar-nav>.open>a:focus {
+    background-color: #000000;
+    color: #c0c0c0;
+}
+
+.navbar-custom .navbar-nav>.open>a .caret,
+.navbar-custom .navbar-nav>.open>a:hover .caret,
+.navbar-custom .navbar-nav>.open>a:focus .caret {
+    border-top-color: #c0c0c0;
+    border-bottom-color: #c0c0c0;
+}
+
+.navbar-custom .navbar-nav>.dropdown>a .caret {
+    border-top-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+
+@media (max-width: 767) {
+    .navbar-custom .navbar-nav .open .dropdown-menu>li>a {
+        color: #ffffff;
+    }
+    .navbar-custom .navbar-nav .open .dropdown-menu>li>a:hover,
+    .navbar-custom .navbar-nav .open .dropdown-menu>li>a:focus {
+        color: #c0c0c0;
+        background-color: transparent;
+    }
+    .navbar-custom .navbar-nav .open .dropdown-menu>.active>a,
+    .navbar-custom .navbar-nav .open .dropdown-menu>.active>a:hover,
+    .navbar-custom .navbar-nav .open .dropdown-menu>.active>a:focus {
+        color: #c0c0c0;
+        background-color: #000000;
+    }
+    .navbar-custom .navbar-nav .open .dropdown-menu>.disabled>a,
+    .navbar-custom .navbar-nav .open .dropdown-menu>.disabled>a:hover,
+    .navbar-custom .navbar-nav .open .dropdown-menu>.disabled>a:focus {
+        color: #cccccc;
+        background-color: transparent;
+    }
+}
+
+.navbar-custom .navbar-link {
+    color: #ffffff;
+}
+
+.navbar-custom .navbar-link:hover {
+    color: #c0c0c0;
+}
+
+.navbar-custom .navbar-link:hover {
+    color: #c0c0c0;
+}
