@@ -43,22 +43,19 @@ $(function() {
                 $('#searchResultsBox').show();
                 $("#searchResults").show();
                 var searchText = document.getElementById("search").value;
-                var libraryEntry;
-                for (i = 0; i < data.length; i++) {
-                    libraryEntry = data[i];
-                    if (libraryEntry.indexOf(searchText) >= 0) {
-                        searchResults.push(libraryEntry);
-                    };
+                if (searchResults.indexOf(searchText) == -1) {
+                    searchResults.push(searchText);
                 };
+                console.log(searchResults);
                 //Fill Search Results Box and link each search result to Info Display Modal.
+                $("#searchResults").html('');
                 for (j = 0; j < searchResults.length; j++) {
-                    $("#searchResults").prepend("<div class='searchResultsItem'><h4><a class='searchResultsItemLink' data-toggle='modal' data-target='#modal' onclick='loadArticle();'>" + searchResults[j] + "</a></h4></div>");
+                        $("#searchResults").prepend("<div class='searchResultsItem'><h4><a class='searchResultsItemLink' data-toggle='modal' data-target='#modal' onclick='loadArticle();'>" + searchResults[j] + "</a></h4></div>");
                 };
             });
         },
     });
 
-    //Automatically add person's country as item for additional reading, and Log clicks on any links in the article being viewed and add them to the search results box as other items for additional reading
     var additionalReadingItem;
     if (additionalReadingItem) {
         addNewSearchResults(additionalReadingItem);
