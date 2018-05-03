@@ -1,4 +1,5 @@
 $(function() {
+    $(".loader").hide();
 
     //VARIABLES
 
@@ -67,6 +68,7 @@ $(function() {
 
 function loadArticle() {
     $('.searchResultsItem').off().click(function() {
+        $(".loader").show();
         requiredArticle = event.target.innerText;
         requiredArticle = requiredArticle.replace("'", "\'");
         console.log(requiredArticle);
@@ -74,10 +76,14 @@ function loadArticle() {
             url: 'search.php',
             method: 'POST',
             data: { 'name': requiredArticle },
-            error: function() { console.log("AJAX call failed") },
+            error: function() {
+                $(".loader").hide();
+                window.alert("AJAX call failed");
+            },
             success: function(data) {
+                $(".loader").hide();
                 //Clear search results box of all items apart from the one(s) clicked on and viewed in the modal during this reload of the page (i.e. keep a record of all the articles seen) 
-                searchResultsBoxTitle.innerText = 'You have viewed or requested article(s) on: -';
+                searchResultsBoxTitle.innerText = 'You have viewed article(s) on: -';
                 $("#searchResults").empty();
                 $("#searchResults").prepend("<div class='searchResultsItem'><h4><a class='searchResultsItemLink' data-toggle='modal' data-target='#modal' onclick='loadArticle();'>" + requiredArticle + "</a></h4></div>");
                 //What comes back is a JSON string

@@ -129,7 +129,7 @@
                                 <!-- Person's pictures go in between <div> tags here. NB: requires separate search on Database **CODE COMPLETE** -->
                                 <div id='personStillsGallery' class='col-md-2' style='max-height: 375px; overflow-y: scroll;'></div>
                                 <!-- Person's biography goes in between <div> tags here **CODE COMPLETE** -->
-                                <div id='personBiog' class='col-md-6'></div>
+                                <div id='personBiog' class='col-md-6'><div class="loader">Loading...</div></div>
                                 <!-- Person's videos go in between <div> tags here. NB: requires separate search on Database **CODE COMPLETE** -->
                                 <div id='videoVault' class='col-md-4' style='max-height: 375px; overflow-y: scroll;'></div>
                             </div>
