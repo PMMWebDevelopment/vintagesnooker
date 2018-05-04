@@ -135,7 +135,7 @@ ul.ui-autocomplete {
 
 body .modal-lg {
     width: 95%;
-    max-height: calc(100vh - 50px);
+    max-height: calc(100vh - 75px);
 }
 
 .modal-header {
