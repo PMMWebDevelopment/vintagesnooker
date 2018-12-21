@@ -1,5 +1,4 @@
 $(function() {
-    $(".loader").hide();
 
     //VARIABLES
 
@@ -21,7 +20,10 @@ $(function() {
     // Commit search result to an array of divs
     var viewedArticles = [];
 
-    //Hide Browse InfoDisplayTab and Search Results Box
+    //Hide Browse Category Accordions, InfoDisplayTab, Search Results Box
+    $('#starsBySurnameAccordion').hide();
+    $('#starsByCountryAccordion').hide();
+    $('#starsByEraAccordion').hide();
     $('#infoDisplayTabs').hide();
     $('#searchResultsBox').hide();
 
@@ -42,25 +44,38 @@ $(function() {
             $("#submitbutton").on('click', function(event) {
                 event.preventDefault();
                 $('#searchResultsBox').show();
-                $("#searchResults").show();
+                $("#searchResults").empty();
                 var searchText = document.getElementById("search").value;
-                if (searchResults.indexOf(searchText) == -1) {
-                    searchResults.push(searchText);
+                var libraryEntry;
+                for (i = 0; i < data.length; i++) {
+                    libraryEntry = data[i];
+                    if (libraryEntry.indexOf(searchText) >= 0) {
+                        searchResults.push(libraryEntry);
+                    };
                 };
-                console.log(searchResults);
                 //Fill Search Results Box and link each search result to Info Display Modal.
-                $("#searchResults").html('');
                 for (j = 0; j < searchResults.length; j++) {
-                        $("#searchResults").prepend("<div class='searchResultsItem'><h4><a class='searchResultsItemLink' data-toggle='modal' data-target='#modal' onclick='loadArticle();'>" + searchResults[j] + "</a></h4></div>");
+                    $("#searchResults").prepend("<div class='searchResultsItem'><h4><a class='searchResultsItemLink' data-toggle='modal' data-target='#modal' onclick='loadArticle();'>" + searchResults[j] + "</a></h4></div>");
                 };
             });
         },
     });
 
+    //Automatically add person's country as item for additional reading, and Log clicks on any links in the article being viewed and add them to the search results box as other items for additional reading
     var additionalReadingItem;
     if (additionalReadingItem) {
         addNewSearchResults(additionalReadingItem);
     };
+
+    //Show Browse Stars Categories depending on which radio button is selected
+
+    //Fill Stars by Surname accordion from database and provide link to InfoDisplay to show relevant article
+
+    //Fill Stars by Country accordion from database and provide link to InfoDisplay to show relevant article
+
+    //Fill Stars by Era accordion from database and provide link to InfoDisplay to show relevant article
+
+    //Fill Tournaments accordion from database and provide link to InfoDisplay to show relevant article
 
 }); //END OF DOCUMENT READY FUNCTION - DO NOT MOVE
 
@@ -68,26 +83,21 @@ $(function() {
 
 function loadArticle() {
     $('.searchResultsItem').off().click(function() {
-        $(".loader").show();
         requiredArticle = event.target.innerText;
         requiredArticle = requiredArticle.replace("'", "\'");
-        console.log(requiredArticle);
+        // console.log(requiredArticle);
         $.ajax({
             url: 'search.php',
             method: 'POST',
             data: { 'name': requiredArticle },
-            error: function() {
-                $(".loader").hide();
-                window.alert("AJAX call failed");
-            },
+            error: function() { console.log("AJAX call failed") },
             success: function(data) {
-                $(".loader").hide();
                 //Clear search results box of all items apart from the one(s) clicked on and viewed in the modal during this reload of the page (i.e. keep a record of all the articles seen) 
-                searchResultsBoxTitle.innerText = 'You have viewed article(s) on: -';
+                searchResultsBoxTitle.innerText = 'You have viewed or requested article(s) on: -';
                 $("#searchResults").empty();
                 $("#searchResults").prepend("<div class='searchResultsItem'><h4><a class='searchResultsItemLink' data-toggle='modal' data-target='#modal' onclick='loadArticle();'>" + requiredArticle + "</a></h4></div>");
                 //What comes back is a JSON string
-                console.log(data);
+                // console.log(data);
                 //JSON string needs to be converted to a JavaScriptarray
                 articleArray = $.parseJSON(data);
                 //Display Article in Info Display box
@@ -99,6 +109,7 @@ function loadArticle() {
                 $('#modalTitle').html("");
                 $('#personName').html("");
                 $('#personLifeDetails').html("");
+                $('#personMainPhoto').html("");
                 $('#personSymbols').html("");
                 $('#personStillsGallery').html("");
                 $('#personBiog').html("");
@@ -120,7 +131,10 @@ function loadArticle() {
                     $('#personLifeDetails').append("<div class='birthDeath'>Died: " + moment(articleArray['date_of_death']).format('Do MMMM YYYY') + ", " + articleArray['place_of_death'] + ".</div>");
                     $('#personName').append("<span id='birthDeathBrackets'>(" + moment(articleArray['date_of_birth']).format('YYYY') + "-" + moment(articleArray['date_of_death']).format('YYYY') + ")</span>");
                 };
-
+                //If person has at least one photo, the first photo in their personal gallery goes in the header between the name details and their boolean categories
+                if (articleArray['personPictureURL1']) {
+                    $('#personMainPhoto').html("<img title='" + articleArray['personPictureCaption1'] + "' data-toggle='tooltip' data-placement='bottom' src='" + articleArray['personPictureURL1'] + "'><br/>Photo courtesy of " + articleArray['personPictureCredit1']);
+                };
                 // Check which boolean categories are showing 1 for "true" and attach the relevant icon: -
                 var booleanCategoriesArray = [articleArray['player_bool'], articleArray['exec_bool'], articleArray['journo_bool'], articleArray['ref_bool'], articleArray['broadcaster_bool'], articleArray['wpc_bool'], articleArray['ukc_bool'], articleArray['ranking_bool'], articleArray['master_bool'], articleArray['natchamp_bool'], articleArray['wac_bool'], articleArray['147_bool']];
                 var playerIconHTML = '<img class="booleanIcon" data-toggle="tooltip" title="Player" data-placement="bottom" src="images/player.png"> ';
@@ -129,7 +143,7 @@ function loadArticle() {
                 var refereeIconHTML = '<img class="booleanIcon" data-toggle="tooltip" title="Referee" data-placement="bottom" src="images/referee.png"> ';
                 var broadcasterIconHTML = '<img class="booleanIcon" data-toggle="tooltip" title="Broadcaster" data-placement="bottom" src="images/broadcaster.png"> ';
                 var wpcIconHTML = '<img class="booleanIcon" data-toggle="tooltip" title="World Professional Champion" data-placement="bottom" src="images/wpc.png"> ';
-                var ukcIconHTML = '<img class="booleanIcon" data-toggle="tooltip" title="UK Champion" data-placement="bottom" src="images/lion.png"> ';
+                var ukcIconHTML = '<img class="booleanIcon" data-toggle="tooltip" title="UK Champion" data-placement="bottom" src="images/britishisles.png"> ';
                 var rankingIconHTML = '<img class="booleanIcon" data-toggle="tooltip" title="Won Ranking Tournament" data-placement="bottom" src="images/ranking.png"> ';
                 var mastersIconHTML = '<img class="booleanIcon" data-toggle="tooltip" title="Won the Masters" data-placement="bottom" src="images/masters.png"> ';
                 var natchampIconHTML = '<img class="booleanIcon" data-toggle="tooltip" title="National Champion" data-placement="bottom" src="images/natchamp.png"> ';
@@ -155,8 +169,6 @@ function loadArticle() {
                         personPictureURLKey = personPictureURLKeyMain + i;
                         personPictureCaptionKey = personPictureCaptionKeyMain + i;
                         personPictureCreditKey = personPictureCreditKeyMain + i;
-                        $('#personStillsGallery').addClass("col-md-2");
-                        $('#personBiog').addClass("col-md-6");
                         $('#personStillsGallery').append("<img src='" + articleArray[personPictureURLKey] + "'><br/><span class='mediaCaptionAndCredit'>" + articleArray[personPictureCaptionKey] + " Picture courtesy of " + articleArray[personPictureCreditKey] + "</span>");
                     };
                 } else {
@@ -168,11 +180,7 @@ function loadArticle() {
                 var majorTournamentWins = articleArray['majorTournamentWins'];
                 var personBiogHTML = articleArray['biography'];
                 // console.log(personBiogHTML);
-                if (majorTournamentWins) {
-                    $('#personBiog').append(personBiogHTML + "<p><h3><strong>Major tournament victories: -</strong></h3></p>" + majorTournamentWins);
-                } else {
-                    $('#personBiog').append(personBiogHTML);
-                };
+                $('#personBiog').append(personBiogHTML + "<p><h3><strong>Major tournament victories: -</strong></h3></p>" + majorTournamentWins);
 
                 // Fill the person's video vault
                 var personVideoURLKeyMain = 'personVideoURL';
@@ -185,7 +193,7 @@ function loadArticle() {
                         personVideoURLKey = personVideoURLKeyMain + i;
                         personVideoCaptionKey = personVideoCaptionKeyMain + i;
                         personVideoCreditKey = personVideoCreditKeyMain + i;
-                        $('#videoVault').append("<div class='row' style='display: flex; align-items: center;'><div style='float: left;'><iframe width='200' height='150' src='" + articleArray[personVideoURLKey] + "' frameborder='0' gesture='media' allow='encrypted-media' allowfullscreen></iframe></div><div class='mediaCaptionAndCredit' style='white-space: normal; '>" + articleArray[personVideoCaptionKey] + " Video courtesy of " + articleArray[personVideoCreditKey] + "</div></div>");
+                        $('#videoVault').append("<div><iframe width='100%' src='" + articleArray[personVideoURLKey] + "' frameborder='0'allow='encrypted-media' allowfullscreen></iframe><br/><span class='mediaCaptionAndCredit' style='white-space: normal'>" + articleArray[personVideoCaptionKey] + " Video courtesy of " + articleArray[personVideoCreditKey] + "</span></div>");
                         // console.log(articleArray[personVideoURLKey]);
                     };
                     // console.log(numberofVideosforPerson);

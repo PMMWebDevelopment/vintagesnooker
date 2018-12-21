@@ -20,7 +20,9 @@
     <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&amp;subset=latin-ext" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
 
     <!-- Site's own styling -->
     <link href="styling.css" rel="stylesheet">
@@ -28,10 +30,9 @@
     <!-- LIBRARY SCRIPTS -->
 
     <!-- jQuery required for Accordions -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/le-frog/jquery-ui.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
     <!-- Moment.js required for date formatting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.2.1/moment.min.js"></script>
 
@@ -45,7 +46,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand">Vintage Snooker</a>
-                <button type="button" class="navbar-toggle" data-target="#navbarCollapse" data-toggle="collapse">
+                <button type="button" class="navbar-toggler" data-target="#navbarCollapse" data-toggle="collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -55,10 +56,12 @@
             <div class="navbar-collapse collapse" id="navbarCollapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#mainHeading">Home</a></li>
-                    <!-- <li><a href="#">Articles</a></li>
+                    <li><a href="#starsBrowserContainer">Stars</a></li>
+                    <li><a href="#tournamentsBrowserContainer">Tournaments</a></li>
+                    <li><a href="#">Articles</a></li>
                     <li><a href="#">About this site</a></li>
                     <li><a href="#">Help</a></li>
-                    <li><a href="#">Contact us</a></li> -->
+                    <li><a href="#">Contact us</a></li>
                 </ul>
             </div>
         </div>
@@ -70,17 +73,17 @@
     <div class="container-fluid" id="headingContainer">
         <div id="mainHeading">
             <h1>Vintage Snooker</h1>
-            <h2>THE STARS PAST AND PRESENT</h2>
+            <h2><a href='#starsBrowserContainer'>THE STARS PAST AND PRESENT</a></h2>
         </div>
     </div>
     <!-- End of Heading -->
 
     <!-- SEARCH FORM -->
-    <div id="searchformdiv">
+    <div id="searchformdiv" class="d-flex justify-content-center">
         <form class="form-inline" method="post" id="searchform">
             <div class="form-group">
                 <label for="search" class="sr-only">Search the database</label>
-                <input type="text" placeholder="Start typing the name of a player" name="search" id="search">
+                <input type="text" placeholder="Search people" name="search" id="search">
             </div>
             <button class="btn btn-success btn-md" id='submitbutton'>Submit</button>
         </form>
@@ -90,7 +93,7 @@
     <!-- SEARCH RESULTS BOX -->
 
     <div class='container-fluid'>
-        <div class="col-md-offset-3 col-md-6" id="searchResultsBox">
+        <div class="offset-md-3 col-md-6" id="searchResultsBox" class="d-flex justify-content-center">
             <h3 id='searchResultsBoxTitle'>Search Results: -</h3>
             <div id="searchResults">
                 <!-- HTML from search results is fed here by the code.js file from data supplied by the AJAX call to search.php -->
@@ -99,14 +102,14 @@
     </div>
     <!-- End of Search Results Box -->
 
-    <!-- INFORMATION MODAL -->
+    <!-- INFORMATION MODALS -->
 
     <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <!-- Put tab reference of chosen subject in between <h5> tags here **CODE COMPLETE**-->
-                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <div class="modal-title" id="modalTitle"></div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -127,11 +130,11 @@
                             </div>   
                             <div id='personBody' class='row'>
                                 <!-- Person's pictures go in between <div> tags here. NB: requires separate search on Database **CODE COMPLETE** -->
-                                <div id='personStillsGallery' class='col-md-2' style='max-height: 350px; overflow-y: scroll;'></div>
+                                <div id='personStillsGallery' class='col-md-2'></div>
                                 <!-- Person's biography goes in between <div> tags here **CODE COMPLETE** -->
-                                <div id='personBiog' class='col-md-6' style='max-height: 350px; overflow-y: scroll;'><div class="loader">Loading...</div></div>
+                                <div id='personBiog' class='col-md-6'></div>
                                 <!-- Person's videos go in between <div> tags here. NB: requires separate search on Database **CODE COMPLETE** -->
-                                <div id='videoVault' class='col-md-4' style='max-height: 350px; overflow-y: scroll;'></div>
+                                <div id='videoVault' class='col-md-4'></div>
                             </div>
                         </div>
                     </div>
@@ -143,7 +146,7 @@
     <!-- FOOTER -->
     <div class="footer">
         <div class="container">
-            <p>Videos are shown for illustrative and educational purposes only. No copyright infringement is intended.</p>
+            <p>&copy; PMM Web Development.</p>
         </div>
     </div>
     <!-- End of Footer -->
@@ -151,7 +154,8 @@
     <!-- EVENT SCRIPTS -->
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     <!-- Site's own JavaScript file -->
     <script src='code.js'></script>
